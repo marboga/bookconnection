@@ -49,6 +49,7 @@ AUTHENTICATION_BACKENDS = [
    'social.backends.facebook.FacebookOAuth2',
    'social.backends.google.GoogleOAuth2',
    'social.backends.twitter.TwitterOAuth',
+   'social.backends.instagram.InstagramOAuth2',
    'django.contrib.auth.backends.ModelBackend',
 ]
 
@@ -136,7 +137,7 @@ USE_L10N = True
 
 USE_TZ = True
 #
-LOGIN_REDIRECT_URL = 'success'
+LOGIN_REDIRECT_URL = '/dashboard/'
 LOGOUT_REDIRECT_URL = 'home'
 
 # Static files (CSS, JavaScript, Images)
