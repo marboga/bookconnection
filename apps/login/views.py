@@ -1,6 +1,6 @@
 from django.shortcuts import render_to_response, HttpResponse, redirect, render
 from django.template.context import RequestContext
-from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 
 def index(request):
