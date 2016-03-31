@@ -43,6 +43,12 @@ INSTALLED_APPS = [
     'social.apps.django_app.default',
 ]
 
+SOCIAL_AUTH_FACEBOOK_KEY = [
+    '1574177392897330'
+]
+SOCIAL_AUTH_FACEBOOK_SECRET = [
+    'e3804b67db20232b08cbfa9ac004f099'
+]
 
 AUTHENTICATION_BACKENDS = [
    'social.backends.facebook.FacebookOAuth2',
