@@ -1,4 +1,4 @@
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, HttpResponse
 from django.template.context import RequestContext
 
 def index(request):
@@ -6,10 +6,11 @@ def index(request):
    return render_to_response('login/index.html', context_instance=context)
 
 def login(request):
-    pass
+    return HttpResponse('towkrorktedd')
 
 def logout(request):
-    pass
+    return HttpResponse('towedd')
 
 def home(request):
-    pass
+    context = RequestContext(request, {'request': request, 'user': request.user})
+    return render_to_response('login/home.html', context_instance=context)
