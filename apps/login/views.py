@@ -18,6 +18,6 @@ def home(request):
     context = RequestContext(request, {'request': request, 'user': request.user})
     return render_to_response('login/home.html', context_instance=context)
 
-@login_required(login_url='/')
+@login_required(login_url='/home')
 def dashboard(request):
     return render_to_response('login/dashboard.html')

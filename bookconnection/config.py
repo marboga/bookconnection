@@ -11,4 +11,4 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = [
 SECRET_KEY = ['kdsjghakgtk4ehagvkjhakweuytkjhtdwuvakjwhvfkjv&WATrkfu3vf,Jhkjc']
 
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/home/'
-SOCIAL_AUTH_LOGIN_URL = '/'
+SOCIAL_AUTH_LOGIN_URL = '/dashboard'
