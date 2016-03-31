@@ -19,12 +19,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = [
-    url(r'^$', views.home, name='home'),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^login/', views.login),
-    url(r'^home/$', views.home),
-    url(r'^logout/$', views.logout),
-    url('', include('django.contrib.auth.urls', namespace='auth')),
-    url('', include('social.apps.django_app.urls', namespace='social')),
+    url(r'^', include('apps.login.urls'))
 
 ]

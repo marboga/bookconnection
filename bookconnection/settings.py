@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/1.9/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.9/ref/settings/
 """
-
+from config import *
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -43,12 +43,7 @@ INSTALLED_APPS = [
     'social.apps.django_app.default',
 ]
 
-SOCIAL_AUTH_FACEBOOK_KEY = [
-    '1574177392897330'
-]
-SOCIAL_AUTH_FACEBOOK_SECRET = [
-    'e3804b67db20232b08cbfa9ac004f099'
-]
+
 
 AUTHENTICATION_BACKENDS = [
    'social.backends.facebook.FacebookOAuth2',
@@ -83,11 +78,11 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.contrib.auth.context_processors.auth',
-                'django.core.context_processors.debug',
-                'django.core.context_processors.i18n',
-                'django.core.context_processors.media',
-                'django.core.context_processors.static',
-                'django.core.context_processors.tz',
+                'django.template.context_processors.debug',
+                'django.template.context_processors.i18n',
+                'django.template.context_processors.media',
+                'django.template.context_processors.static',
+                'django.template.context_processors.tz',
                 'social.apps.django_app.context_processors.backends',
                 'social.apps.django_app.context_processors.login_redirect',
             ],
@@ -141,7 +136,8 @@ USE_L10N = True
 
 USE_TZ = True
 #
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = 'success'
+LOGOUT_REDIRECT_URL = 'home'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
