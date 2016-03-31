@@ -1,0 +1,14 @@
+{% extends 'login/base.html' %}
+
+{% block main %}
+<div>
+      <a href="/logout_view">Logout</a>
+      {% if user and not user.is_anonymous %}
+        <li>
+          <a>Hello {{ user.get_full_name|default:user.username }}!</a>
+        </li>
+        <li>
+          <a href="{% url 'logout_view' %}">Logout</a>
+      {% endif %}
+</div>
+{% endblock %}

@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'hahaha'
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -43,13 +43,6 @@ INSTALLED_APPS = [
     'social.apps.django_app.default',
 ]
 
-=======
-SOCIAL_AUTH_FACEBOOK_KEY = [
-   'hahaha'
-]
-SOCIAL_AUTH_FACEBOOK_SECRET = [
- 'hahah'
-]
 
 
 AUTHENTICATION_BACKENDS = [
