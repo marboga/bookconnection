@@ -8,7 +8,10 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = [
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = [
     'eJujFG07ETgkE-CpULPr_pOt'
 ]
-SECRET_KEY = ['kdsjghakgtk4ehagvkjhakweuytkjhtdwuvakjwhvfkjv&WATrkfu3vf,Jhkjc']
+SECRET_KEY = ['kdsj3ghakgtk24ehagvkjh4akweuytkjhtd73wuvakj6whvfkjv&WATrkfu3vf,Jhkjc']
 
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/home/'
-SOCIAL_AUTH_LOGIN_URL = '/dashboard'
+SOCIAL_AUTH_LOGIN_URL = '/dashboard/'
+
+SOCIAL_AUTH_TWITTER_KEY = '237866783-1x11rhSJFKRuxoXwZ0MOJStLrjnm79uNS1T51uew'
+SOCIAL_AUTH_TWITTER_SECRET = 'fEiXcsH0UDfEXWu87vEt5O9Pve8CRCoERna0ydfSPecWP'
