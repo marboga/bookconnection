@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     ##mine
     'apps.login',
     'social.apps.django_app.default',
+    'geoip2',
 ]
 
 
@@ -137,6 +138,9 @@ USE_L10N = True
 
 USE_TZ = True
 #
+
+GEOIP_PATH = '/'
+
 LOGIN_REDIRECT_URL = '/dashboard/'
 LOGOUT_REDIRECT_URL = 'home'
 

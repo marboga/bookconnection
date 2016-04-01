@@ -2,13 +2,41 @@ html, body {
    height: 100%;
    margin: 0;
    padding: 0;
-}
-
-#map {
-   height: 100%;
+   text-align: center;
 }
 
 nav.navbar {
-   background:
+   background: linear-gradient(to bottom, #357266 11%, #357266 90%);
+   height: 120px;
+   width: 100%;
+}
 
+.navbar h1 {
+    color: white;
+    font-family: verdana;
+    font-size: 4em;
+}
+
+h2 {
+   font-size: 2.5em;
+}
+
+#map {
+   margin: 0 auto;
+   height: 650px;
+   width: 850px;
+   background-color: #CCC;
+}
+h1 {
+   margin: 0;
+   padding-top: 15px;
+}
+
+p.splash {
+   font-size: 1.5em;
+}
+
+ul li {
+   list-style-type: none;
+   font-size: 1em;
 }

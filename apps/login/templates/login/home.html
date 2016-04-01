@@ -1,20 +1,37 @@
-{% extends 'login/base.html' %}
-
-{% block main %}
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <title>Neighborhood: Home</title>
+   <!-- Bootstrap -->
+   <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+   <link href="/static/css/bootstrap-theme.min.css" rel="stylesheet">
+   {% load static %}
+   <link rel="stylesheet" href="{% static 'login/style.css' %}">
  <div>
-    <nav class="navbar navbar-default">
-      <h1>Tweet Visualiser</h1>
-       
-    </nav>
-
- <p>
-   <ul>
+   <nav class="navbar navbar-default">
+      <h1>Neighborhood</h1>
+   </nav>
    {% if user and not user.is_anonymous %}
 
-       <h2>Hello {{ user.get_full_name|default:user.username }}!</h2>
-       <a href="{% url 'social:begin' 'goodreads' %}">Login with Goodreads</a>
-       <a href="{% url 'logout_view' %}">Logout</a>
+      <h2>Hello {{ user.get_full_name|default:user.username }}!</h2>
+      <p class="splash col-md-9">
+          <a href="{% url 'dashboard' %}">Welcome Home.</a>
+      </p>
+      <a href="{% url 'logout_view' %}">Logout</a>
    {% else %}
+   <h2>Welcome to the Neighborhood</h2>
+   <h3>the location based social network</h3>
+      <p class="splash col-md-9">
+      Remember how your grandmother used to peer out her window at the neighbors and perform a running commentary of what the neighbors and strangers were doing?
+      <br><br>
+      <span>Neighborhood</span> is the app to become a little bit more like your grandmother, but in a future-y, tech-y way.
+      <br><br>
+      So come in. See what's happening in your <span>Neighborhood<span>!
+      </p>
+      <ul>
      <li>
        <a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a>
      </li>
@@ -28,4 +45,5 @@
    </ul>
  </p>
  </div>
-{% endblock %}
+</body>
+</html>

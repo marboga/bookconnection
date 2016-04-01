@@ -32,7 +32,6 @@ def dashboard(request):
 	access_token = '237866783-1xllrhSJFKRuxoXwZ0MOJStLrjnm79uNS1I51uew'
 	access_token_secret = 'fEiXcsH0UDfEXWu87vEt5O9Pve8CRCoERna0ydfSPecWP'
 	auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-
 	# try:
 	# 	redirect_url = auth.get_authorization_url()
 	# except tweepy.TweepError:
@@ -48,8 +47,6 @@ def dashboard(request):
 	# 	auth.get_access_token(verifier)
 	# except tweepy.TweepError:
 	# 	print 'Error! Failed to get access token.'
-
-
 
 	# auth = tweepy.OAuthHandler(consumer_key, consumer_token)
 	auth.set_access_token(access_token, access_token_secret)
