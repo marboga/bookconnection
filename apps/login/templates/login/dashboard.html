@@ -55,15 +55,11 @@
 						{% if tweet.coordinates.coordinates %}
 							var zlong = {{tweet.coordinates.coordinates}}[0];
 							var zlat = {{tweet.coordinates.coordinates}}[1];
-							createNewMarker(zlat, zlong, "FE7569");
-						{% endif %}
-					{% endfor %}
-					{% for tweet in user_tweets %}
-						{% if tweet.coordinates.coordinates %}
-							console.log("user tweet");
-							var zlong = {{tweet.coordinates.coordinates}}[0];
-							var zlat = {{tweet.coordinates.coordinates}}[1];
-							createNewMarker(zlat, zlong, "39d244");
+							{% if tweet.user.screen_name == user.username %}
+								createNewMarker(zlat, zlong, "39d244");
+							{% else %}
+								createNewMarker(zlat, zlong, "FE7569");
+							{% endif %}
 						{% endif %}
 					{% endfor %}
 				{% endif %}

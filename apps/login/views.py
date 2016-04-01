@@ -56,6 +56,5 @@ def dashboard(request):
 	api = tweepy.API(auth, wait_on_rate_limit_notify=True)
 	# api.update_status('tweepy + oauth!')
 	tweets = api.search(count="100",geocode="47.60994,-122.19666,1.5mi")
-	user_tweets = api.user_timeline(count="50")
-	context = RequestContext(request, {'request': request, 'user':request.user, 'tweets': tweets, 'user_tweets': user_tweets})
+	context = RequestContext(request, {'request': request, 'user':request.user, 'tweets': tweets})
 	return render_to_response('login/dashboard.html', context_instance=context)
