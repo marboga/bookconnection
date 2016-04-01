@@ -53,6 +53,7 @@
                clickable: true,
                draggable: false,
                title: ztitle,
+               url: "https://www.twitter.com/",
                animation:google.maps.Animation.DROP,
                map: map
             });
@@ -63,6 +64,7 @@
                {% if tweet.coordinates.coordinates %}
                   var zlong = {{tweet.coordinates.coordinates}}[0];
                   var zlat = {{tweet.coordinates.coordinates}}[1];
+                  console.log('{{tweet.source}}');
                {% if tweet.user.screen_name == user.username %}
                   createNewMarker(zlat, zlong, "39d244");
                {% else %}
@@ -70,6 +72,10 @@
 
                {% endif %}
                {% endif %}
+
+               marker.addListener('click', function(){
+                  window.open(this.url+'{{tweet.user.screen_name}}', '_blank');
+               });
                marker.addListener('mouseover', function(){
                   infowindow = new google.maps.InfoWindow({
                      content: '{{tweet.user.screen_name}}: {{tweet.text}}'
@@ -83,49 +89,49 @@
          {% endif %}
 
          map.set('styles', [
-         {
-         featureType: 'road',
-         elementType: 'geometry',
-         stylers: [
-         { color: '#994d4d' },
-         { weight: 0.12 }
-         ]
-         }, {
-         featureType: 'road',
-         elementType: 'labels',
-         stylers: [
-         { color: '#ddddd' },
-         { saturation: -70 },
-         { invert_lightness: false }
-         ]
-         }, {
-         featureType: 'landscape',
-         elementType: 'geometry',
-         stylers: [
-         { hue: '#f99f00' },
-         { gamma: 90 },
-         { saturation: 82 },
-         { lightness: 96 }
-         ]
-         }, {
-         featureType: 'poi.school',
-         elementType: 'geometry',
-         stylers: [
-         { hue: '#fff700' },
-         { lightness: -15 },
-         { saturation: 69 }
-         ]
-         }, {
-         featureType: 'landscape.natural',
-         elementType: 'labels',
-         stylers: [
-         { color: '#ddddd' },
-         { saturation: 70 },
-         { weight: 3.1 },
-         { invert_lightness: false }
-         ]
-         }
-         ]);
+            {
+            featureType: 'road',
+            elementType: 'geometry',
+            stylers: [
+            { color: '#994d4d' },
+            { weight: 0.12 }
+            ]
+            }, {
+            featureType: 'road',
+            elementType: 'labels',
+            stylers: [
+            { color: '#ddddd' },
+            { saturation: -70 },
+            { invert_lightness: false }
+            ]
+            }, {
+            featureType: 'landscape',
+            elementType: 'geometry',
+            stylers: [
+            { hue: '#f99f00' },
+            { gamma: 90 },
+            { saturation: 82 },
+            { lightness: 96 }
+            ]
+            }, {
+            featureType: 'poi.school',
+            elementType: 'geometry',
+            stylers: [
+            { hue: '#fff700' },
+            { lightness: -15 },
+            { saturation: 69 }
+            ]
+            }, {
+            featureType: 'landscape.natural',
+            elementType: 'labels',
+            stylers: [
+            { color: '#ddddd' },
+            { saturation: 70 },
+            { weight: 3.1 },
+            { invert_lightness: false }
+            ]
+            }
+            ]);
          }
       </script>
    </body>
