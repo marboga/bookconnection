@@ -22,8 +22,20 @@
   <body>
      <div class="">
         <h1>Tweetster</h1>
+        <div>
+          {% if user and not user.is_anonymous %}
+          <p>Hello {{ user.get_full_name|default:user.username }}!</p>
+          <a href="{% url 'logout_view' %}">Logouts</a>
+          {% if user and not user.is_anonymous %}
 
+          {% for tweet in tweets %}
+          <p>{{tweet.coordinates.coordinate[0]}}, {{tweet.coordinates.coordinates[1]}}</p>
+          {% endfor %}
+          {% endif %}
+          {% endif %}
+      </div>
         <div id="map"></div>
+
      </div>
     <script>
       var map;
@@ -35,15 +47,17 @@
             // heading: 00,
             // tilt: 60
          };
-         map = new google.maps.Map(document.getElementById('map'), mapOptions);
-         var marker = new google.maps.Marker({
-            position: {lat: 47.60995, lng: -122.19668},
-            icon: {
-               path: google.maps.SymbolPath.CIRCLE,
-            },
-            draggable: true,
-            map: map
-         });
+         function createNewMarker(latitud, longitud){
+            map = new google.maps.Map(document.getElementById('map'), mapOptions);
+            var marker = new google.maps.Marker({
+               position: {lat: 47.60995, lng: -122.19668},
+               icon: {
+                  path: google.maps.SymbolPath.CIRCLE,
+               },
+               draggable: true,
+               map: map
+            });
+         }
          map.set('styles', [
   {
     featureType: 'road',
@@ -88,10 +102,18 @@
      ]
    }
 ]);
-
-// map.setMapTypeId: (google.maps.MapTypeId.SATELLITE)
       }
     </script>
+
+    <div>
+      {% if user and not user.is_anonymous %}
+
+      {% for tweet in tweets %}
+      <p>{{tweet.coordinates.coordinate[0]}}, {{tweet.coordinates.coordinates[1]}}</p>
+      {% endfor %}
+      {% endif %}
+   </div>
+
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFs86uQe3UfAhBZlew9SzZ1QzoTYUeU-s&callback=initMap"></script>
   </body>
 </html>
