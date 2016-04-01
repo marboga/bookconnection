@@ -7,24 +7,19 @@
  <p>
    <ul>
    {% if user and not user.is_anonymous %}
-     <li>
-       <a>Hello {{ user.get_full_name|default:user.username }}!</a>
-     </li>
-     <li>
+
+       <h2>Hello {{ user.get_full_name|default:user.username }}!</h2>
+       <a href="{% url 'social:begin' 'goodreads' %}">Login with Goodreads</a>
        <a href="{% url 'logout_view' %}">Logout</a>
-     </li>
    {% else %}
      <li>
-       <a href="{% url 'social:begin' 'facebook' %} dashboard">Login with Facebook</a>
+       <a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a>
      </li>
      <li>
        <a href="{% url 'social:begin' 'google-oauth2' %}?next={{ 'dashboard' }}">Login with Google</a>
      </li>
      <li>
-       <a href="{% url 'social:begin' 'twitter' %}?next={{ 'dashboard' }}">Login with Twitter</a>
-     </li>
-     <li>
-       <a href="{% url 'social:begin' 'instagram' %}?next={{ 'dashboard' }}">Login with Instagram</a>
+       <a href="{% url 'social:begin' 'twitter' %}">Login with Twitter</a>
      </li>
    {% endif %}
    </ul>
