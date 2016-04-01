@@ -1,15 +1,21 @@
 {% extends 'login/base.html' %}
 
 {% block main %}
-<div>
-   I AM A FUCKING dashboard
-      <a href="{% url 'logout_view' %}">Logout</a>
-      {% if user and not user.is_anonymous %}
-        <li>
-          <a>Hello {{ user.get_full_name|default:user.username }}!</a>
-        </li>
-        <li>
-          <a href="{% url 'logout_view' %}">Logout</a>
-      {% endif %}
+	<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+  <!--       <script>
+            $(document).ready(function(){
+                $.get("https://api.twitter.com/oauth/authorize?oauth_token=237866783-1xllrhSJFKRuxoXwZ0MOJStLrjnm79uNS1I51uew", function(res) {
+                    console.log(res);
+                });
+            })
+        </script> -->
+	<div>
+  {% if user and not user.is_anonymous %}
+      <p>Hello {{ user.get_full_name|default:user.username }}!</p>
+      <a href="{% url 'logout_view' %}">Logouts</a>
+      {% for tweet in tweets %}
+      	<p>{{tweet.text}}</p>
+      {% endfor %}
+  {% endif %}
 </div>
 {% endblock %}

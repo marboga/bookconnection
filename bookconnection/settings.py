@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     ##mine
     'apps.login',
+    'twitter_tag',
     'social.apps.django_app.default',
 ]
 

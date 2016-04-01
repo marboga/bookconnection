@@ -15,16 +15,16 @@
      </li>
    {% else %}
      <li>
-       <a href="{% url 'social:begin' 'facebook' %} dashboard">Login with Facebook</a>
+       <a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a>
      </li>
      <li>
-       <a href="{% url 'social:begin' 'google-oauth2' %}?next={{ 'dashboard' }}">Login with Google</a>
+       <a href="{% url 'social:begin' 'google-oauth2' %}">Login with Google</a>
      </li>
      <li>
-       <a href="{% url 'social:begin' 'twitter' %}?next={{ 'dashboard' }}">Login with Twitter</a>
+       <a href="{% url 'social:begin' 'twitter' %}">Login with Twitter</a>
      </li>
      <li>
-       <a href="{% url 'social:begin' 'instagram' %}?next={{ 'dashboard' }}">Login with Instagram</a>
+       <a href="{% url 'social:begin' 'instagram' %}">Login with Instagram</a>
      </li>
    {% endif %}
    </ul>
