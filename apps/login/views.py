@@ -52,6 +52,6 @@ def dashboard(request):
 	auth.set_access_token(access_token, access_token_secret)
 	api = tweepy.API(auth, wait_on_rate_limit_notify=True)
 	# api.update_status('tweepy + oauth!')
-	tweets = api.search(count="100",geocode="47.60994,-122.19666,1.5mi")
+	tweets = api.search(count="100",geocode="47.60994,-122.19666,2mi")
 	context = RequestContext(request, {'request': request, 'user':request.user, 'tweets': tweets})
 	return render_to_response('login/dashboard.html', context_instance=context)
