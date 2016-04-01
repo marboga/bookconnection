@@ -41,54 +41,45 @@
            // heading: 00,
            // tilt: 60
         };
+
+         var marker;
          map = new google.maps.Map(document.getElementById('map'), mapOptions);
-      function createNewMarker(latitud, longitud, color, zcontent){
-         var marker = new google.maps.Marker({
-         position: {lat: latitud, lng: longitud},
-         icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + color),
-         clickable: true,
-         draggable: false,
-         animation:google.maps.Animation.DROP,
-         title: zcontent,
-         map: map
-       });
+
+         function createNewMarker(latitud, longitud, color){
+            marker = new google.maps.Marker({
+            position: {lat: latitud, lng: longitud},
+            icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + color),
+            clickable: true,
+            draggable: false,
+            animation:google.maps.Animation.DROP,
+            map: map
+          });
+
+
        }
-
-		{% if user and not user.is_anonymous %}
-			{% for tweet in tweets %}
-				{% if tweet.coordinates.coordinates %}
-					var zlong = {{tweet.coordinates.coordinates}}[0];
-					var zlat = {{tweet.coordinates.coordinates}}[1];
-               var zcontent = '{{tweet.user.screen_name}},{{tweet.text}}';
-					createNewMarker(zlat, zlong, "FE7569");
-               console.log(zname);
-               contentArray.push(zcontent);
+				{% if user and not user.is_anonymous %}
+					{% for tweet in tweets %}
+						{% if tweet.coordinates.coordinates %}
+							var zlong = {{tweet.coordinates.coordinates}}[0];
+							var zlat = {{tweet.coordinates.coordinates}}[1];
+							{% if tweet.user.screen_name == user.username %}
+								createNewMarker(zlat, zlong, "39d244");
+							{% else %}
+								createNewMarker(zlat, zlong, "FE7569");
+							{% endif %}
+						{% endif %}
+						var infowindow = new google.maps.InfoWindow({});
+						marker.addListener('click', function(){
+								infowindow = {
+									content: "{{tweet.text}}"
+								}
+								infowindow.open(map, marker);
+				     });
+						marker.addListener('mouseout', function(){
+								infowindow.close();
+				     });
+					{% endfor %}
 				{% endif %}
-			{% endfor %}
-			{% for tweet in user_tweets %}
-				{% if tweet.coordinates.coordinates %}
-					console.log("user tweet");
-					var zlong = {{tweet.coordinates.coordinates}}[0];
-					var zlat = {{tweet.coordinates.coordinates}}[1];
-					createNewMarker(zlat, zlong, "39d244");
-				{% endif %}
-			{% endfor %}
-		{% endif %}
-
-
-      var infowindow =  new google.maps.InfoWindow({
-      	content: 'content',
-      	map: map,
-      });
-
-       google.maps.event.addListener(marker, 'mouseover', function(){
-          infowindow.open(map, this);
-       })
-
-      // assuming you also want to hide the infowindow when user mouses-out
-      infowindow.addListener('mouseout', function() {
-          infowindow.close();
-      });
 
          map.set('styles', [
          {
