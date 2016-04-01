@@ -39,17 +39,20 @@
            // heading: 00,
            // tilt: 60
         };
+
+         var marker;
          map = new google.maps.Map(document.getElementById('map'), mapOptions);
          function createNewMarker(latitud, longitud, color){
-            var marker = new google.maps.Marker({
+            marker = new google.maps.Marker({
             position: {lat: latitud, lng: longitud},
             icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + color),
             clickable: true,
             draggable: false,
             animation:google.maps.Animation.DROP,
             map: map
-
           });
+
+          
        }
 				{% if user and not user.is_anonymous %}
 					{% for tweet in tweets %}
@@ -62,9 +65,19 @@
 								createNewMarker(zlat, zlong, "FE7569");
 							{% endif %}
 						{% endif %}
+						var infowindow = new google.maps.InfoWindow({});
+						marker.addListener('click', function(){
+								infowindow = {
+									content: "{{tweet.text}}"
+								}
+								infowindow.open(map, marker);
+				     });
+						marker.addListener('mouseout', function(){
+								infowindow.close();
+				     });
 					{% endfor %}
 				{% endif %}
-
+			
          map.set('styles', [
          {
          featureType: 'road',
