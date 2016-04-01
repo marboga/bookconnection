@@ -23,6 +23,12 @@ h2 {
    font-family: verdana;
 }
 
+h3 {
+   font-size: 1.5em;
+   font-weight: lighter;
+   font-family: verdana;
+}
+
 #map {
    margin: 0 auto;
    height: 650px;
@@ -41,4 +47,7 @@ p.splash {
 ul li {
    list-style-type: none;
    font-size: 1em;
+}
+p.col-md-6 {
+   padding: 0 20%;
 }

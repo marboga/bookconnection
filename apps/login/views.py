@@ -32,26 +32,9 @@ def dashboard(request):
 	access_token = '237866783-1xllrhSJFKRuxoXwZ0MOJStLrjnm79uNS1I51uew'
 	access_token_secret = 'fEiXcsH0UDfEXWu87vEt5O9Pve8CRCoERna0ydfSPecWP'
 	auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-	# try:
-	# 	redirect_url = auth.get_authorization_url()
-	# except tweepy.TweepError:
-	# 	print 'Error! Failed to get request token.'
-	# request.session['request_token'] = auth.request_token
-	# verifier = request.GET.get('oauth_verifier')
-	# auth = tweepy.OAuthHandler(consumer_key, consumer_token)
-	# token = request.session['request_token']
-	# del request.session['request_token']
-	# auth.request_token = token
-
-	# try:
-	# 	auth.get_access_token(verifier)
-	# except tweepy.TweepError:
-	# 	print 'Error! Failed to get access token.'
-
-	# auth = tweepy.OAuthHandler(consumer_key, consumer_token)
 	auth.set_access_token(access_token, access_token_secret)
 	api = tweepy.API(auth, wait_on_rate_limit_notify=True)
-	# api.update_status("I'm in the Neighborhood!")
+	# api.update_status("I just finished a 24 hour hackathon!")
 	tweets = api.search(count="100",geocode="47.60994,-122.19666,1mi")
 	context = RequestContext(request, {'request': request, 'user':request.user, 'tweets': tweets})
 	return render_to_response('login/dashboard.html', context_instance=context)
