@@ -20,100 +20,91 @@
     </style>
   </head>
   <body>
+     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFs86uQe3UfAhBZlew9SzZ1QzoTYUeU-s&callback=initMap"></script>
      <div class="">
         <h1>Tweetster</h1>
         <div>
           {% if user and not user.is_anonymous %}
-          <p>Hello {{ user.get_full_name|default:user.username }}!</p>
-          <a href="{% url 'logout_view' %}">Logouts</a>
-          {% if user and not user.is_anonymous %}
-
-          {% for tweet in tweets %}
-          <p>{{tweet.coordinates.coordinate[0]}}, {{tweet.coordinates.coordinates[1]}}</p>
-          {% endfor %}
-          {% endif %}
+             <p>Hello {{ user.get_full_name|default:user.username }}!</p>
+             <a href="{% url 'logout_view' %}">Logout</a>
           {% endif %}
       </div>
         <div id="map"></div>
-
      </div>
-    <script>
-      var map;
-      function initMap() {
-         var mapOptions = {
-            zoom: 14,
-            center: {lat: 47.60994, lng: -122.19666},
-            mapTypeId: google.maps.MapTypeId.TERRAIN,
-            // heading: 00,
-            // tilt: 60
-         };
-         function createNewMarker(latitud, longitud){
-            map = new google.maps.Map(document.getElementById('map'), mapOptions);
-            var marker = new google.maps.Marker({
-               position: {lat: 47.60995, lng: -122.19668},
-               icon: {
-                  path: google.maps.SymbolPath.CIRCLE,
-               },
-               draggable: true,
-               map: map
-            });
-         }
-         map.set('styles', [
-  {
-    featureType: 'road',
-    elementType: 'geometry',
-    stylers: [
-      { color: '#994d4d' },
-      { weight: 0.12 }
-    ]
-  }, {
-    featureType: 'road',
-    elementType: 'labels',
-    stylers: [
-      { color: '#ddddd' },
-      { saturation: -70 },
-      { invert_lightness: false }
-    ]
-  }, {
-    featureType: 'landscape',
-    elementType: 'geometry',
-    stylers: [
-      { hue: '#f99f00' },
-      { gamma: 90 },
-      { saturation: 82 },
-      { lightness: 96 }
-    ]
-  }, {
-    featureType: 'poi.school',
-    elementType: 'geometry',
-    stylers: [
-      { hue: '#fff700' },
-      { lightness: -15 },
-      { saturation: 69 }
-    ]
-   }, {
-     featureType: 'landscape.natural',
-     elementType: 'labels',
-     stylers: [
-        { color: '#ddddd' },
-        { saturation: 70 },
-        { weight: 3.1 },
-        { invert_lightness: false }
-     ]
-   }
-]);
+     <script>
+     var map;
+     function initMap() {
+        var mapOptions = {
+           zoom: 14,
+           center: {lat: 47.60994, lng: -122.19666},
+           mapTypeId: google.maps.MapTypeId.TERRAIN,
+           // heading: 00,
+           // tilt: 60
+        };
+        map = new google.maps.Map(document.getElementById('map'), mapOptions);
+        function createNewMarker(latitud, longitud){
+           var marker = new google.maps.Marker({
+             position: {lat: latitud, lng: longitud},
+             icon: {
+                path: google.maps.Marker,
+             },
+             draggable: false,
+             map: map
+          });
+       }
+       {% if user and not user.is_anonymous %}
+         {% for tweet in tweets %}
+             var zlong = {{tweet.coordinates.coordinates}}[0];
+             var zlat = {{tweet.coordinates.coordinates}}[1];
+             createNewMarker(zlat, zlong);
+         {% endfor %}
+       {% endif %}
+
+        map.set('styles', [
+           {
+             featureType: 'road',
+             elementType: 'geometry',
+             stylers: [
+                { color: '#994d4d' },
+                { weight: 0.12 }
+             ]
+          }, {
+             featureType: 'road',
+             elementType: 'labels',
+             stylers: [
+                { color: '#ddddd' },
+                { saturation: -70 },
+                { invert_lightness: false }
+             ]
+          }, {
+             featureType: 'landscape',
+             elementType: 'geometry',
+             stylers: [
+                { hue: '#f99f00' },
+                { gamma: 90 },
+                { saturation: 82 },
+                { lightness: 96 }
+             ]
+          }, {
+             featureType: 'poi.school',
+             elementType: 'geometry',
+             stylers: [
+                { hue: '#fff700' },
+                { lightness: -15 },
+                { saturation: 69 }
+             ]
+          }, {
+             featureType: 'landscape.natural',
+             elementType: 'labels',
+             stylers: [
+                { color: '#ddddd' },
+                { saturation: 70 },
+                { weight: 3.1 },
+                { invert_lightness: false }
+                ]
+             }
+             ]);
       }
     </script>
-
-    <div>
-      {% if user and not user.is_anonymous %}
-
-      {% for tweet in tweets %}
-      <p>{{tweet.coordinates.coordinate[0]}}, {{tweet.coordinates.coordinates[1]}}</p>
-      {% endfor %}
-      {% endif %}
-   </div>
-
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFs86uQe3UfAhBZlew9SzZ1QzoTYUeU-s&callback=initMap"></script>
   </body>
 </html>
