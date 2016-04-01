@@ -9,77 +9,78 @@
    {% load static %}
    <link rel="stylesheet" href="{% static 'login/style.css' %}">
   </head>
-  <body>
-     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFs86uQe3UfAhBZlew9SzZ1QzoTYUeU-s&callback=initMap"></script>
-     <div class="container">
-        <nav class="navbar navbar-default">
-           <h1>Neighborhood</h1>
-        </nav>
-        <div>
-          {% if user and not user.is_anonymous %}
-             <h2>Hello {{ user.get_full_name|default:user.username }}!</h2>
-          {% endif %}
+<body>
+   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFs86uQe3UfAhBZlew9SzZ1QzoTYUeU-s&callback=initMap">
+   </script>
+   <div class="container">
+      <nav class="navbar navbar-default">
+         <h1>Neighborhood</h1>
+      </nav>
+      <div>
+         {% if user and not user.is_anonymous %}
+            <h2>Hello {{ user.get_full_name|default:user.username }}!</h2>
+         {% endif %}
       </div>
-        <div id="map"></div>
+      <div id="map"></div>
       </div>
       <a href="{% url 'logout_view' %}">Logout</a>
       <script>
-      var map;
-      var marker;
-      var contentArray = [];
-      if (navigator.geolocation) {
-         navigator.geolocation.getCurrentPosition(function (position) {
-            initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+         var map;
+         var marker;
+         var contentArray = [];
+         if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+               initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
             map.setCenter(initialLocation);
-         });
-      }
-      function initMap() {
-        var mapOptions = {
-           zoom: 15,
-           center: {lat: 47.60994, lng: -122.19666},
-           mapTypeId: google.maps.MapTypeId.TERRAIN,
-           // heading: 00,
-           // tilt: 60
-        };
+            });
+         }
+         function initMap() {
+            var mapOptions = {
+               zoom: 15,
+               center: {lat: 47.60994, lng: -122.19666},
+               mapTypeId: google.maps.MapTypeId.TERRAIN,
+               // heading: 00,
+               // tilt: 60
+            };
 
          var marker;
          map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
-         function createNewMarker(latitud, longitud, color){
+         function createNewMarker(latitud, longitud, color, ztitle){
             marker = new google.maps.Marker({
-            position: {lat: latitud, lng: longitud},
-            icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + color),
-            clickable: true,
-            draggable: false,
-            animation:google.maps.Animation.DROP,
-            map: map
-          });
+               position: {lat: latitud, lng: longitud},
+               icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + color),
+               clickable: true,
+               draggable: false,
+               title: ztitle,
+               animation:google.maps.Animation.DROP,
+               map: map
+            });
+         }
 
+         {% if user and not user.is_anonymous %}
+            {% for tweet in tweets %}
+               {% if tweet.coordinates.coordinates %}
+                  var zlong = {{tweet.coordinates.coordinates}}[0];
+                  var zlat = {{tweet.coordinates.coordinates}}[1];
+               {% if tweet.user.screen_name == user.username %}
+                  createNewMarker(zlat, zlong, "39d244");
+               {% else %}
+                  createNewMarker(zlat, zlong, "FE7569");
 
-       }
-				{% if user and not user.is_anonymous %}
-					{% for tweet in tweets %}
-						{% if tweet.coordinates.coordinates %}
-							var zlong = {{tweet.coordinates.coordinates}}[0];
-							var zlat = {{tweet.coordinates.coordinates}}[1];
-							{% if tweet.user.screen_name == user.username %}
-								createNewMarker(zlat, zlong, "39d244");
-							{% else %}
-								createNewMarker(zlat, zlong, "FE7569");
-							{% endif %}
-						{% endif %}
-						var infowindow = new google.maps.InfoWindow({});
-						marker.addListener('click', function(){
-								infowindow = {
-									content: "{{tweet.text}}"
-								}
-								infowindow.open(map, marker);
-				     });
-						marker.addListener('mouseout', function(){
-								infowindow.close();
-				     });
-					{% endfor %}
-				{% endif %}
+               {% endif %}
+               {% endif %}
+               marker.addListener('mouseover', function(){
+                  infowindow = new google.maps.InfoWindow({
+                     content: '{{tweet.user.screen_name}}: {{tweet.text}}'
+                  });
+                  infowindow.open(map, this);
+               });
+               marker.addListener('mouseout', function(){
+                  infowindow.close();
+               });
+            {% endfor %}
+         {% endif %}
 
          map.set('styles', [
          {
@@ -125,7 +126,7 @@
          ]
          }
          ]);
-      }
-    </script>
-  </body>
+         }
+      </script>
+   </body>
 </html>
