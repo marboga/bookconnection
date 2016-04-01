@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Book Connection</title>
+    <title>Tweet Visualizer</title>
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
     <link href="/static/css/bootstrap.min.css" rel="stylesheet">
@@ -39,26 +39,35 @@
            // heading: 00,
            // tilt: 60
         };
-        map = new google.maps.Map(document.getElementById('map'), mapOptions);
-        function createNewMarker(latitud, longitud){
-           var marker = new google.maps.Marker({
-             position: {lat: latitud, lng: longitud},
-             icon: {
-                path: google.maps.Marker,
-             },
-             clickable: true,
-             draggable: false,
-             animation:google.maps.Animation.DROP,
-             map: map
+         map = new google.maps.Map(document.getElementById('map'), mapOptions);
+         function createNewMarker(latitud, longitud, color){
+            var marker = new google.maps.Marker({
+            position: {lat: latitud, lng: longitud},
+            icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + color),
+            clickable: true,
+            draggable: false,
+            animation:google.maps.Animation.DROP,
+            map: map
+
           });
        }
-       {% if user and not user.is_anonymous %}
-         {% for tweet in tweets %}
-             var zlong = {{tweet.coordinates.coordinates}}[0];
-             var zlat = {{tweet.coordinates.coordinates}}[1];
-             createNewMarker(zlat, zlong);
-         {% endfor %}
-       {% endif %}
+		{% if user and not user.is_anonymous %}
+			{% for tweet in tweets %}
+				{% if tweet.coordinates.coordinates %}
+					var zlong = {{tweet.coordinates.coordinates}}[0];
+					var zlat = {{tweet.coordinates.coordinates}}[1];
+					createNewMarker(zlat, zlong, "FE7569");
+				{% endif %}
+			{% endfor %}
+			{% for tweet in user_tweets %}
+				{% if tweet.coordinates.coordinates %}
+					console.log("user tweet");
+					var zlong = {{tweet.coordinates.coordinates}}[0];
+					var zlat = {{tweet.coordinates.coordinates}}[1];
+					createNewMarker(zlat, zlong, "39d244");
+				{% endif %}
+			{% endfor %}
+		{% endif %}
 
          map.set('styles', [
          {
