@@ -32,7 +32,6 @@ def dashboard(request):
 	access_token = '237866783-1xllrhSJFKRuxoXwZ0MOJStLrjnm79uNS1I51uew'
 	access_token_secret = 'fEiXcsH0UDfEXWu87vEt5O9Pve8CRCoERna0ydfSPecWP'
 	auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-
 	# try:
 	# 	redirect_url = auth.get_authorization_url()
 	# except tweepy.TweepError:
@@ -49,12 +48,11 @@ def dashboard(request):
 	# except tweepy.TweepError:
 	# 	print 'Error! Failed to get access token.'
 
-
-
 	# auth = tweepy.OAuthHandler(consumer_key, consumer_token)
 	auth.set_access_token(access_token, access_token_secret)
 	api = tweepy.API(auth)
-	# api.update_status('tweepy + oauth!')
-	tweets = api.search(geocode="47.60994,-122.19666,4mi")
+	# api.update_status('I\'m in the Neighborhood')
+	
+	tweets = api.search(count="100",geocode="47.60994,-122.19666,4mi")
 	context = RequestContext(request, {'request': request, 'user':request.user, 'tweets': tweets})
 	return render_to_response('login/dashboard.html', context_instance=context)
