@@ -4,8 +4,8 @@
     <title>My Neighborhood</title>
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
-    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
-   <link href="/static/css/bootstrap-theme.min.css" rel="stylesheet">
+    <!-- <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+   <link href="/static/css/bootstrap-theme.min.css" rel="stylesheet"> -->
    {% load static %}
    <link rel="stylesheet" href="{% static 'login/style.css' %}">
   </head>
@@ -64,21 +64,20 @@
                {% if tweet.coordinates.coordinates %}
                   var zlong = {{tweet.coordinates.coordinates}}[0];
                   var zlat = {{tweet.coordinates.coordinates}}[1];
-                  console.log('{{tweet.source}}');
-               {% if tweet.user.screen_name == user.username %}
-                  createNewMarker(zlat, zlong, "39d244");
-               {% else %}
-                  createNewMarker(zlat, zlong, "FE7569");
-
-               {% endif %}
+	               {% if tweet.user.screen_name == user.username %}
+	                  createNewMarker(zlat, zlong, "39d244");
+	               {% else %}
+	                  createNewMarker(zlat, zlong, "FE7569");
+	               {% endif %}
                {% endif %}
 
                marker.addListener('click', function(){
                   window.open(this.url+'{{tweet.user.screen_name}}', '_blank');
                });
+					
                marker.addListener('mouseover', function(){
                   infowindow = new google.maps.InfoWindow({
-                     content: '{{tweet.user.screen_name}}: {{tweet.text}}'
+							content: '{{tweet.user.screen_name}}: '+`{{tweet.text}}`
                   });
                   infowindow.open(map, this);
                });

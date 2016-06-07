@@ -3,6 +3,7 @@ from django.template.context import RequestContext
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 import tweepy
+import re
 from bookconnection import config
 
 def index(request):
@@ -27,10 +28,11 @@ def home(request):
 @login_required(login_url='home')
 def dashboard(request):
 	print "dashboard"
-	consumer_key = '7wNNbY73FH1zy3CF1YTfEcUql'
-	consumer_secret = 'RqnFtaBOTmpsqR1WjJSf8icSVYpUYbxp1UeBUxTI0uMnXOYkGI'
-	access_token = '237866783-1xllrhSJFKRuxoXwZ0MOJStLrjnm79uNS1I51uew'
-	access_token_secret = 'fEiXcsH0UDfEXWu87vEt5O9Pve8CRCoERna0ydfSPecWP'
+	# these are our thingys for twitter
+	consumer_key = 'lvkxdMrGwgi31uBQiI1xeWcvh'
+	consumer_secret = 'a6lOPq812jbpuqAJQNuZR0NcpALb5C5i55TM6oxDUpk2iCWIdt'
+	access_token = '3259568774-QpD37XpTQ3VIywnF2HnzBPkjGeQBGbbdtRiSqPD'
+	access_token_secret = 'Yvf8cxPcVjqPYQtMq673qhDglKfOYjVVggfOKaLtlYHL7'
 	auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 	auth.set_access_token(access_token, access_token_secret)
 	api = tweepy.API(auth, wait_on_rate_limit_notify=True)
