@@ -31,13 +31,21 @@
          if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function (position) {
                initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+					// console.log(initialLocation, "location initially")
             map.setCenter(initialLocation);
             });
          }
          function initMap() {
+				var latt;
+				var longg;
+				navigator.geolocation.getCurrentPosition(function (position) {
+               latt = google.maps.LatLng(position.coords.latitude);
+					longg = google.maps.LatLng(position.coords.latitude);
+            });
+				console.log(latt, longg)
             var mapOptions = {
                zoom: 15,
-               center: {lat: 47.60994, lng: -122.19666},
+               center: {lat: latt, lng: longg},
                mapTypeId: google.maps.MapTypeId.TERRAIN,
                // heading: 00,
                // tilt: 60
@@ -74,7 +82,7 @@
                marker.addListener('click', function(){
                   window.open(this.url+'{{tweet.user.screen_name}}', '_blank');
                });
-					
+
                marker.addListener('mouseover', function(){
                   infowindow = new google.maps.InfoWindow({
 							content: '{{tweet.user.screen_name}}: '+`{{tweet.text}}`
